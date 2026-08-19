@@ -50,3 +50,21 @@ export async function register(username, email, password) {
 export async function getActiveSeasons() {
   return apiRequest("/seasons/active");
 }
+
+export async function getPLTeams(seasonId) {
+  return apiRequest(`/pl/teams?season_id=${seasonId}`);
+}
+
+export async function getPLPrediction(seasonId) {
+  return apiRequest(`/pl/predictions?season_id=${seasonId}`);
+}
+
+export async function savePLPrediction(seasonId, predictions) {
+  return apiRequest("/pl/predictions", {
+    method: "POST",
+    body: JSON.stringify({
+      season_id: seasonId,
+      predictions,
+    }),
+  });
+}

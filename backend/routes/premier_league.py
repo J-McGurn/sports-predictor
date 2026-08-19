@@ -101,6 +101,10 @@ def submit_prediction():
     for prediction in existing_predictions:
         db.session.delete(prediction)
 
+    # Force the DELETE statements to be sent to the database
+    # before inserting the replacement predictions.
+    db.session.flush()
+
     for prediction in predictions:
         new_prediction = PLPrediction(
             user_id=user_id,
