@@ -33,13 +33,6 @@ function Home() {
             </p>
           </Link>
         </div>
-
-        <div className="auth-links">
-          <Link to="/login">Login</Link>
-          <Link to="/register" className="register-button">
-            Register
-          </Link>
-        </div>
       </section>
     </main>
   );
