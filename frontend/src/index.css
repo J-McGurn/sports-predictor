@@ -276,3 +276,17 @@ a {
   color: #171923;
   font-weight: 600;
 }
+
+.navbar-logout {
+  background: none;
+  border: none;
+  padding: 0;
+
+  color: #171923;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+
+  cursor: pointer;
+}
