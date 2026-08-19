@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { login } from "../services/api";
 
 function Login() {
   const navigate = useNavigate();
@@ -17,33 +18,17 @@ function Login() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+        const data = await login(email, password);
 
-      const data = await response.json();
+        localStorage.setItem("access_token", data.access_token);
 
-      if (!response.ok) {
-        setError(data.error || "Login failed.");
-        return;
-      }
-
-      localStorage.setItem("access_token", data.access_token);
-
-      navigate("/");
+        navigate("/dashboard");
     } catch (error) {
-      setError("Unable to connect to the server.");
+        setError(error.message);
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  }
+ }
 
   return (
     <main className="auth-page">
