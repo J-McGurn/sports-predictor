@@ -68,3 +68,49 @@ export async function savePLPrediction(seasonId, predictions) {
     }),
   });
 }
+
+export async function getF1Drivers(seasonId) {
+  return apiRequest(`/f1/drivers?season_id=${seasonId}`);
+}
+
+export async function getF1Constructors(seasonId) {
+  return apiRequest(`/f1/constructors?season_id=${seasonId}`);
+}
+
+export async function getF1DriverPrediction(seasonId) {
+  return apiRequest(
+    `/f1/predictions/drivers?season_id=${seasonId}`
+  );
+}
+
+export async function getF1ConstructorPrediction(seasonId) {
+  return apiRequest(
+    `/f1/predictions/constructors?season_id=${seasonId}`
+  );
+}
+
+export async function saveF1DriverPrediction(
+  seasonId,
+  predictions
+) {
+  return apiRequest("/f1/predictions/drivers", {
+    method: "POST",
+    body: JSON.stringify({
+      season_id: seasonId,
+      predictions,
+    }),
+  });
+}
+
+export async function saveF1ConstructorPrediction(
+  seasonId,
+  predictions
+) {
+  return apiRequest("/f1/predictions/constructors", {
+    method: "POST",
+    body: JSON.stringify({
+      season_id: seasonId,
+      predictions,
+    }),
+  });
+}
