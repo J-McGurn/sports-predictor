@@ -157,6 +157,8 @@ def submit_driver_prediction():
 
     for prediction in existing_predictions:
         db.session.delete(prediction)
+        
+    db.session.flush()
 
     for prediction in predictions:
         db.session.add(
@@ -243,6 +245,8 @@ def submit_constructor_prediction():
 
     for prediction in existing_predictions:
         db.session.delete(prediction)
+            
+    db.session.flush()
 
     for prediction in predictions:
         db.session.add(
@@ -259,3 +263,97 @@ def submit_constructor_prediction():
     return {
         "message": "F1 Constructors' Championship prediction saved successfully"
     }, 201
+    
+    
+@f1.route("/predictions/drivers", methods=["GET"])
+@jwt_required()
+def get_driver_prediction():
+    user_id = get_jwt_identity()
+    season_id = request.args.get("season_id", type=int)
+
+    if not season_id:
+        return {
+            "error": "season_id is required"
+        }, 400
+
+    season = Season.query.filter_by(
+        id=season_id,
+        sport="F1"
+    ).first()
+
+    if not season:
+        return {
+            "error": "F1 season not found"
+        }, 404
+
+    predictions = (
+        F1DriverPrediction.query
+        .filter_by(
+            user_id=user_id,
+            season_id=season_id
+        )
+        .order_by(F1DriverPrediction.predicted_position)
+        .all()
+    )
+
+    return {
+        "season": season.name,
+        "predictions": [
+            {
+                "position": prediction.predicted_position,
+                "driver": {
+                    "id": prediction.driver.id,
+                    "name": prediction.driver.name,
+                    "abbreviation": prediction.driver.abbreviation
+                }
+            }
+            for prediction in predictions
+        ]
+    }, 200
+    
+    
+@f1.route("/predictions/constructors", methods=["GET"])
+@jwt_required()
+def get_constructor_prediction():
+    user_id = get_jwt_identity()
+    season_id = request.args.get("season_id", type=int)
+
+    if not season_id:
+        return {
+            "error": "season_id is required"
+        }, 400
+
+    season = Season.query.filter_by(
+        id=season_id,
+        sport="F1"
+    ).first()
+
+    if not season:
+        return {
+            "error": "F1 season not found"
+        }, 404
+
+    predictions = (
+        F1ConstructorPrediction.query
+        .filter_by(
+            user_id=user_id,
+            season_id=season_id
+        )
+        .order_by(F1ConstructorPrediction.predicted_position)
+        .all()
+    )
+
+    return {
+        "season": season.name,
+        "predictions": [
+            {
+                "position": prediction.predicted_position,
+                "constructor": {
+                    "id": prediction.constructor.id,
+                    "name": prediction.constructor.name,
+                    "abbreviation": prediction.constructor.abbreviation
+                }
+            }
+            for prediction in predictions
+        ]
+    }, 200
