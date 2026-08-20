@@ -1,0 +1,190 @@
+.sport-page {
+  min-height: calc(100vh - 70px);
+  padding: 50px 20px;
+}
+
+.sport-page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sport-page-header {
+  margin-bottom: 40px;
+}
+
+.sport-page-header h1 {
+  margin: 0 0 10px;
+  font-size: 40px;
+}
+
+.sport-page-header p {
+  margin: 0;
+  color: #626878;
+  font-size: 18px;
+}
+
+.team-list h2 {
+  margin-bottom: 20px;
+}
+
+.team-list-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.team-card {
+  background: white;
+  padding: 20px;
+
+  border-radius: 10px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+
+  font-weight: 600;
+}
+
+.prediction-section {
+  max-width: 850px;
+}
+
+.prediction-instructions {
+  margin-bottom: 25px;
+}
+
+.prediction-instructions h2 {
+  margin-bottom: 8px;
+}
+
+.prediction-instructions p {
+  margin: 0;
+  color: #626878;
+}
+
+.prediction-table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.07);
+}
+
+.prediction-table-header {
+  display: grid;
+  grid-template-columns: 100px 1fr 60px;
+
+  padding: 15px 20px;
+
+  background: #f3f4f6;
+
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.prediction-row {
+  display: grid;
+  grid-template-columns: 100px 1fr 60px;
+
+  align-items: center;
+
+  min-height: 60px;
+  padding: 0 20px;
+
+  border-bottom: 1px solid #e5e7eb;
+  background: white;
+}
+
+.prediction-row:last-child {
+  border-bottom: none;
+}
+
+.prediction-position {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.prediction-team {
+  font-weight: 600;
+}
+
+.drag-handle {
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  background: transparent;
+
+  font-size: 20px;
+
+  cursor: grab;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.prediction-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 25px;
+}
+
+.prediction-actions button {
+  padding: 12px 24px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #171923;
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.prediction-actions button:hover {
+  opacity: 0.9;
+}
+
+.prediction-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.prediction-success {
+  margin-bottom: 20px;
+  padding: 12px 16px;
+
+  border-radius: 8px;
+
+  background: #ecfdf5;
+  color: #047857;
+
+  font-weight: 600;
+}
+
+@media (max-width: 800px) {
+  .team-list-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .prediction-table-header {
+    grid-template-columns: 60px 1fr 50px;
+  }
+
+  .prediction-row {
+    grid-template-columns: 60px 1fr 50px;
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  .team-list-grid {
+    grid-template-columns: 1fr;
+  }
+}
